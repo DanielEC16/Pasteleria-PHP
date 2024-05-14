@@ -1,8 +1,6 @@
 * {
   padding: 0;
   margin: 0;
-  outline: none;
-  border: none;
   box-sizing: border-box;
 }
 
@@ -29,6 +27,7 @@ header .nav__container {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  height: auto;
   padding: 14px 40px;
   position: fixed;
   z-index: 12;
@@ -72,10 +71,90 @@ header .nav__container .nav-links a:hover::after {
   width: 90%;
 }
 header .nav__container .btn {
+  border: none;
   padding: 13px 25px;
   font-size: 15px;
   border-radius: 8px;
   font-weight: 200;
   background-color: #6c2c34;
   color: #ffeff2;
+}
+
+.selected {
+  padding-top: 60px;
+}
+.selected .container-selected {
+  display: flex;
+  padding: 15px 0;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 97, 133, 0.7);
+  gap: 100px;
+}
+.selected .container-selected a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-decoration: none;
+}
+.selected .container-selected a ::after {
+  content: " ";
+  position: absolute;
+  width: 0;
+  height: 3px;
+  background-color: #ffeff2;
+  bottom: -15px;
+  left: 50%;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+.selected .container-selected a span {
+  opacity: 0.6;
+  font-size: 15px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  color: #ffeff2;
+}
+.selected .container-selected a img {
+  opacity: 0.3;
+  width: 45px;
+}
+.selected .container-selected a:hover ::after {
+  content: " ";
+  position: absolute;
+  width: 90%;
+  height: 3px;
+  background-color: #ffeff2;
+  bottom: -15px;
+  left: 50%;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+.selected .container-selected a:hover img {
+  opacity: 1;
+  filter: invert(100%);
+}
+.selected .container-selected a:hover span {
+  opacity: 1;
+}
+
+.search-container {
+  width: 100%;
+  margin-top: 20px;
+}
+.search-container .search-input {
+  display: flex;
+  justify-content: center;
+}
+.search-container .search-input input {
+  letter-spacing: 1.5px;
+  font-size: 25px;
+  width: 50%;
+  height: 40px;
+}
+.search-container .search-input img {
+  padding: 10px;
+  width: 20px;
+  background-color: #ff2a5f;
 }/*# sourceMappingURL=style.css.map */
