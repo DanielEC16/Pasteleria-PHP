@@ -1,0 +1,17 @@
+header .swiper-pagination-bullet-active {
+  background-color: $amaranth-100;
+}
+header .swiper_1 .swiper-pagination {
+  position: relative;
+  bottom: 50px;
+}
+
+header {
+    .swiper-button-prev, .swiper-button-next {
+        color: rgba($amaranth-50, 0.4); 
+      }
+      
+      .swiper-button-prev:hover, .swiper-button-next:hover {
+        color: rgba($amaranth-50, 1); 
+      }
+}

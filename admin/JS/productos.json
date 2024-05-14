@@ -1,0 +1,33 @@
+const data =[
+    {
+      "titulo": "Tarta de Manzana",
+      "descripcion": "Deliciosa tarta de manzana casera con una base crujiente y relleno de manzanas frescas.",
+      "precio": 12.50,
+      "imagen": "../../img/Productos/0.jpg"
+    },
+    {
+      "titulo": "Croissant de Chocolate",
+      "descripcion": "Croissant de hojaldre fresco relleno de chocolate negro y cubierto con azúcar glas.",
+      "precio": 2.75,
+      "imagen": "../../img/Productos/4.jpg"
+    },
+    {
+      "titulo": "Éclair de Vainilla",
+      "descripcion": "Éclair relleno de crema de vainilla suave y cubierto con glaseado de chocolate.",
+      "precio": 3.20,
+      "imagen": "../../img/Productos/1.jpg"
+    },
+    {
+      "titulo": "Pastel de Zanahoria",
+      "descripcion": "Pastel húmedo de zanahoria con nueces y una capa de glaseado de queso crema.",
+      "precio": 14.99,
+      "imagen": "../../img/Productos/2.jpg"
+    },
+    {
+      "titulo": "Macarons Variados",
+      "descripcion": "Selección de macarons en diferentes sabores como frambuesa, limón y pistacho.",
+      "precio": 1.50,
+      "imagen": "../../img/Productos/3.jpg"
+    }
+  ]
+  

@@ -1,0 +1,167 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import "../colors.scss";
+@import "_swiper-edit.scss";
+
+* {
+  padding: 0;
+  margin: 0;
+  outline: none;
+  border: none;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #090909f2;
+  overflow-x: hidden;
+}
+body::-webkit-scrollbar {
+  width: 10px;
+  background-color: none;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: white;
+  border-radius: 30px;
+}
+
+header {
+  .nav__container {
+    background-color: rgba($amaranth-700, 0.05);
+    box-shadow: 0px 15px 40px rgba($amaranth-700, 0.07);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 14px 40px;
+    position: fixed;
+    z-index: 12;
+    backdrop-filter: blur(10px);
+    .nav-logo {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      color: $amaranth-50;
+      img {
+        width: 50px;
+        border-radius: 100%;
+      }
+    }
+    .nav-links {
+      display: flex;
+      flex-direction: row;
+      list-style: none;
+      gap: 100px;
+      a {
+        text-decoration: none;
+        position: relative;
+        padding-bottom: 0.75rem;
+        color: $amaranth-50;
+      }
+      a::after {
+        content: " ";
+        position: absolute;
+        height: 2px;
+        width: 0;
+        bottom: 5px;
+        left: 50%;
+        background-color: $amaranth-400;
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+      }
+      a:hover::after {
+        width: 90%;
+      }
+    }
+    .btn {
+      padding: 13px 25px;
+      font-size: 15px;
+      border-radius: 8px;
+      font-weight: 200;
+      background-color: $color3;
+      color: $amaranth-50;
+    }
+  }
+  .carrousel_swipper {
+    position: relative;
+    .swiper_1 {
+      position: relative;
+    }
+    .carrousel_text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 2;
+      color: $amaranth-50;
+      span {
+        font-size: 30px;
+      }
+      h1 {
+        margin-top: -40px;
+        font-size: 130px;
+        text-shadow: 0 3px 8px #ffffff55;
+        letter-spacing: -3px;
+        color: $amaranth-50;
+      }
+      p {
+        margin-top: -20px;
+        margin-bottom: 70px;
+        font-size: 25px;
+      }
+      a {
+        background-color: $amaranth-50;
+        text-decoration: none;
+        color: $amaranth-800;
+        font-size: 20px;
+        font-weight: bold;
+        padding: 15px 30px;
+        border-radius: 35px 6px;
+      }
+    }
+
+    .swiper_1 {
+      .swiper-slide img {
+        width: 100%;
+        height: 42rem;
+        object-fit: cover;
+        object-position: center;
+        filter: brightness(0.4);
+        mask-image: linear-gradient(black 80%, transparent);
+      }
+    }
+  }
+}
+
+.locales {
+margin: 40px 0;
+  h3 {
+    font-family: "Pacifico", sans-serif;
+    color: $amaranth-50;
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 70px;
+    font-weight: 100;
+  }
+  .swiper_2 {
+    width: 100%;
+    .swiper-slide { 
+      display: grid;
+      place-content: center;
+      img {
+        transition: all 0.5s ease-in;
+        border-radius: 8px;
+        width: 300px;
+        height: 350px;
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+  }
+}
+
+.locales .swiper-slide:hover img {
+  transition: all 1s ease-in;
+  transform: rotateY(360deg);
+}
