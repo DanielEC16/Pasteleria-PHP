@@ -120,6 +120,16 @@ header .nav__container .btn {
   opacity: 0.3;
   width: 45px;
 }
+.selected .container-selected .select span {
+  opacity: 1;
+}
+.selected .container-selected .select img {
+  opacity: 1;
+  filter: invert(100%);
+}
+.selected .container-selected .select ::after {
+  width: 90%;
+}
 .selected .container-selected a:hover ::after {
   content: " ";
   position: absolute;
@@ -148,13 +158,48 @@ header .nav__container .btn {
   justify-content: center;
 }
 .search-container .search-input input {
+  padding-left: 10px;
   letter-spacing: 1.5px;
   font-size: 25px;
   width: 50%;
   height: 40px;
+  border: none;
+  border-radius: 10px 0 0 10px;
 }
-.search-container .search-input img {
-  padding: 10px;
-  width: 20px;
+.search-container .search-input .img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 10px 10px 0;
+  width: 60px;
+  height: 40px;
   background-color: #ff2a5f;
+  cursor: pointer;
+}
+.search-container .search-input .img img {
+  width: 25px;
+}
+
+.productos-container {
+  margin-top: 30px;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 0 30px;
+  color: white;
+}
+.productos-container .card {
+  border: 1px solid #fff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.productos-container .card img {
+  align-self: center;
+  width: 300px;
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
 }/*# sourceMappingURL=style.css.map */
