@@ -99,6 +99,10 @@ section {
     outline: none;
     font-size: 1rem;
     transition: 0.4s;
+    a{
+      color: $blue-50;
+      text-decoration: none;
+    }
     :hover {
       opacity: 0.9;
     }

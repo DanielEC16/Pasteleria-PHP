@@ -101,6 +101,10 @@ section .difuminador {
   font-size: 1rem;
   transition: 0.4s;
 }
+.contenedor button a {
+  color: #e8f0ff;
+  text-decoration: none;
+}
 .contenedor button :hover {
   opacity: 0.9;
 }/*# sourceMappingURL=login.css.map */

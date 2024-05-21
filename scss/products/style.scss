@@ -159,7 +159,7 @@ header {
 }
 .container-icon{
   position: relative;
-  left: 300px;
+  left: 100px;
   i{
     scale: 2;
     color: $amaranth-50;
@@ -189,7 +189,6 @@ header {
   position: absolute;
   top: 50px;
   right: 0;
-
   background-color: #fff;
   width: 400px;
   z-index: 1;
@@ -268,9 +267,6 @@ header {
   object-fit: cover;
   object-position: center;
 }
-
-
-
 
 .search-container {
   width: 100%;
