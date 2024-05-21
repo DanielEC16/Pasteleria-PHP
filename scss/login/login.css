@@ -1,36 +1,106 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 * {
+  font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100vh;
   background: url(https://img.freepik.com/vector-gratis/pasteles-dulces-pizarra_1284-3606.jpg);
+  -webkit-backdrop-filter: brightness(0.5);
+          backdrop-filter: brightness(0.5);
   background-repeat: repeat;
-  -webkit-backdrop-filter: blur(3px) brightness(0.3);
-          backdrop-filter: blur(3px) brightness(0.3);
-  color: white;
-  display: grid;
-  place-content: center;
+  background-position: center;
+}
+section .difuminador {
+  position: absolute;
+  -webkit-backdrop-filter: brightness(0.2) blur(2px);
+          backdrop-filter: brightness(0.2) blur(2px);
+  width: 100%;
+  height: 100vh;
 }
 
-form {
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-  border: 1px solid #fff;
+.contenedor {
   border-radius: 20px;
+  position: relative;
+  padding: 0 140px;
+  -webkit-backdrop-filter: blur(15px);
+          backdrop-filter: blur(15px);
+  border: 2px solid #b3cbff;
+  height: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.contenedor .formulario {
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  padding: 50px;
+  gap: 10px;
 }
-form h1 {
-  font-size: 50px;
+.contenedor h2 {
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+  color: #e8f0ff;
+  text-shadow: 0 0 20px rgba(86, 115, 255, 0.8);
   text-align: center;
 }
-form .inputs {
-  display: flex;
-  flex-direction: column;
+.contenedor .input-container {
+  position: relative;
+  margin: 30px 0;
+  width: 300px;
+  border-bottom: 2px solid #d5e4ff;
+}
+.contenedor .input-container label {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  transform: translateY(-50%);
+  color: #e8f0ff;
+  font-size: 1rem;
+  pointer-events: none;
+  transition: 0.6s;
+  font-weight: bold;
+}
+.contenedor .input-container input:focus ~ label,
+.contenedor .input-container input:valid ~ label {
+  top: -8px;
+}
+.contenedor .input-container input {
+  width: 100%;
+  height: 50px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  padding: 10px 40px 10px 10px;
+  color: #e8f0ff;
+}
+.contenedor .input-container i {
+  position: absolute;
+  color: #b3cbff;
+  font-size: 1.6rem;
+  top: 19px;
+  right: 8px;
+}
+.contenedor button {
+  color: #e8f0ff;
+  width: 100%;
+  height: 45px;
+  border-radius: 40px;
+  background: #2f41ff;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+  font-size: 1rem;
+  transition: 0.4s;
+}
+.contenedor button :hover {
+  opacity: 0.9;
 }/*# sourceMappingURL=login.css.map */
