@@ -1,4 +1,3 @@
-
 <form method="POST" action="../../admin/php/peticiones_admin.php" enctype="multipart/form-data">
     <label for="">Nombre</label>
     <input type="text" name="nombre">
@@ -14,3 +13,8 @@
     <input type="file" name="imagen">
     <button type="submit" name="proceso" value="agregarProd">Agregar Producto</button>
 </form>
+<?php
+
+include '../../admin/php/peticiones_admin.php';
+mostrarProductos($conn);
+?>

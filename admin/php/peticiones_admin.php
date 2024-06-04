@@ -13,7 +13,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo "Error al agregar el producto.";
                 }
                 break;
-            case 'otra_accion':
+            case 'agregarAdmin':
+                if (agregarAdmin($conn)) {
+                    header("Location: ../../pages/login/admin.php"); // Redirige si el producto se agregó correctamente
+                    exit();
+                } else {
+                    echo "Error.";
+                }
                 break;
             default:
                 echo "Acción no válida.";
@@ -52,6 +58,28 @@ function mostrarProductos($conn)
 }
 
 
+function mostrarAdmins($conn){
+    $query = "SELECT * FROM admins";
+    $result = $conn->query($query);
+    if ($result->num_rows > 0) {
+        echo "<table>";
+        echo "<tr><th>ID</th><th>Nombre</th><th>Apellido</th><th>Correo</th></tr>";
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . $row['codigo'] . "</td>";
+            echo "<td>" . $row['nombre'] . "</td>";
+            echo "<td>" . $row['apellido'] . "</td>";
+            echo "<td>" . $row['correo'] . "</td>";        
+            echo "</tr>";
+        }
+        
+        echo "</table>";
+    } else {
+        echo "No se encontraron productos.";
+    }
+}
+
+
 
 
 function agregar($conn)
@@ -68,5 +96,24 @@ function agregar($conn)
     
     return $stmt->execute();
 }
+
+
+function agregarAdmin($conn) {
+    $nombre = $_POST['nombre'];
+    $apellido = $_POST['apellido'];
+    $correo = $_POST['correo'];
+    $password = $_POST['password'];
+
+    $stmt = $conn->prepare("INSERT INTO admins (Nombre, Apellido, Correo, password) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $nombre, $apellido, $correo, $password);
+
+    if ($stmt->execute()) {
+        return true;
+    } else {
+        error_log("Error: " . $stmt->error); // Guardar error en log para referencia
+        return false;
+    }
+}
+
 ?>
 
