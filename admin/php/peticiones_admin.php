@@ -39,14 +39,20 @@ function mostrarProductos($conn)
             echo "<td>" . $row['Precio'] . "</td>";
             echo "<td>" . $row['CantidadEnStock'] . "</td>";
             echo "<td>" . $row['Categoria'] . "</td>";
-            echo "<td><img src='data:image/jpg;base64," . base64_encode($row['foto']) . "'></td>";
+            
+            // Ajusta los atributos para asegurarte de que estén entre comillas
+            echo "<td><img src='data:image/jpg;base64," . base64_encode($row['foto']) . "' alt='Imagen del producto'></td>";
             echo "</tr>";
         }
+        
         echo "</table>";
     } else {
         echo "No se encontraron productos.";
     }
 }
+
+
+
 
 function agregar($conn)
 {
