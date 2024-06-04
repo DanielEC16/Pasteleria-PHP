@@ -57,16 +57,11 @@
 
         <div class="ds-panel">
 
-            <div class="panel-header">
-                <div class="icono">
-                    <i class="fa-solid fa-bag-shopping"></i>
-                </div>
-                <h2>Compras</h2>
-            </div>
-
-            <div class="ds-panel-content">
-                <p>Aquí el contenido</p>
-            </div>
+            <?php
+            include '../../admin/php/formulario-agregar.php';
+            include '../../admin/php/peticiones_admin.php';
+            mostrarProductos($conn);
+            ?>
 
         </div>
 
