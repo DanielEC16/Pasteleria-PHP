@@ -63,7 +63,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['agregarAdmin'])) {
         $url = "../../pages/login/admin.php"; // Ruta correcta para redirigir
         header("Location: $url?mensaje=" . urlencode($mensaje));
         exit;
-        exit;
     } else {
         // Si hubo un error, mostrar el mensaje de error
         echo "<p>Error al agregar el administrador: " . mysqli_error($conn) . "</p>";

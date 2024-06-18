@@ -1,1 +1,117 @@
+@import "../colors.scss";
+
+.content {
+  display: none;
+  width: 100%;
+}
+.content.active {
+  display: block;
+}
+
+.contenedor{
+    display: flex;
+    justify-content: space-between;
+    button{
+        background-color: $blue-400;
+        color: $blue-100;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        &:hover{
+            background-color: $blue-800;
+            cursor: pointer;
+        }
+    }
+}
+
+hr{
+    margin: 30px 0;
+    opacity: .2;
+}
+
+.productos-container,.clientes-container,.admins-container,.icons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border-radius: 200px;
+    border: 1px solid #ddd;
+    th,
+    td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+
+      &:last-child {
+        text-align: center;
+      }
+
+      img {
+        max-width: 100px;
+        height: auto;
+      }
+    }
+
+    th {
+      background-color: $blue-400;
+    }
+
+    tr:hover {
+      background-color: $blue-200;
+    }
+  }
+
+  /* Estilos para los enlaces */
+  a {
+    text-decoration: none;
+    color: $blue-900;
+
+    &:hover {
+      color: red;
+    }
+  }
+
+  /* Estilos para el modal */
+.modal {
+    display: none; /* Por defecto el modal está oculto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    z-index: 1000; /* Z-index alto para que esté por encima de todo */
+    overflow: auto;
+}
+
+.modal-contenido {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 5px;
+}
+
+.cerrar-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cerrar-modal:hover,
+.cerrar-modal:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
 

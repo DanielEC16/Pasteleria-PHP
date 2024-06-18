@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tienda de Cupcakes</title>
     <link rel="stylesheet" href="../../scss/products/products.css">
     <script src="https://kit.fontawesome.com/75a5f6846b.js" crossorigin="anonymous"></script>
 </head>
@@ -20,7 +20,7 @@
             <ul class="nav-links">
                 <li class="link"><a href="../../index.php">Inicio</a></li>
                 <li class="link"><a href="#">Productos</a></li>
-                <li class="link"><a href="../../index.php">Direccion</a></li>
+                <li class="link"><a href="../../index.php">Dirección</a></li>
                 <li class="link"><a href="../../index.php">Contacto</a></li>
             </ul>
             <div class="container-icon">
@@ -33,7 +33,7 @@
 
                 <div class="container-cart-products hidden-cart">
                     <div class="row-product hidden">
-                        //*! AQUI VAN LOS PRODUCTOS
+                        //*! AQUÍ VAN LOS PRODUCTOS
                     </div>
 
                     <div class="cart-total hidden">
@@ -64,11 +64,27 @@
     <br>
     <main class="selected">
         <div class="container-selected">
-            <a href="#" class="link"><img src="../../img/products-icons/icon-5.png" alt=""><span>Todo</span></a>
-            <a href="#" class="link"><img src="../../img/products-icons/icon-1.png" alt=""><span>Bocaditos</span></a>
-            <a href="#" class="link"><img src="../../img/products-icons/icon-2.png" alt=""><span>Tortas</span></a>
-            <a href="#" class="link"><img src="../../img/products-icons/icon-3.png" alt=""><span>Porciones</span></a>
-            <a href="#" class="link"><img src="../../img/products-icons/icon-4.png" alt=""><span>Pays</span></a>
+            <a href="#" class="link select" data-categoria="Todo"><img src="../../img/products-icons/icon-4.png" alt=""><span>Todo</span></a>
+            <?php
+            require '../../php/conexion.php';
+
+            $queryCat = "SELECT * FROM categoria";
+            $resultCat = $conn->query($queryCat);
+
+            if ($resultCat->num_rows > 0) {
+                while ($row = $resultCat->fetch_assoc()) {
+                    $categoria_id = $row['cod'];
+                    $nombre_categoria = $row['nombre'];
+                    $icono_base64 = base64_encode($row['icono']);
+                    echo "<a href='../../php/products/obtener_productos.php?categoria=" . urlencode($nombre_categoria) . "' class='link' data-categoria='$nombre_categoria'>";
+                    echo "<img src='data:image/png;base64, $icono_base64' alt='$nombre_categoria'>";
+                    echo "<span>$nombre_categoria</span></a>";
+                }
+            } else {
+                echo "<p>No se encontraron categorías.</p>";
+            }
+            $conn->close();
+            ?>
         </div>
     </main>
 
@@ -80,56 +96,70 @@
         </div>
     </section>
 
-
-
     <section class="productos-container">
-        <div class="card">
-            <img src="../../img/Productos/0.jpg" alt="">
-            <div class="info">
-                <h3>Bolas de Helado</h3>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur nemo ab saepe. Earum, sapiente.
-                Eaque, reiciendis.
-            </div>
-            <div class="price">S/. 99.90</div>
-            <button class="btn-add-cart">Agregar al carrito <i class="fa-solid fa-circle-plus"></i> </button>
-        </div>
-        <div class="card">
-            <img src="../../img/Productos/1.jpg" alt="">
-            <div class="info">
-                <h3>Indulgencia</h3>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur nemo ab saepe. Earum, sapiente.
-                Eaque, reiciendis.
-            </div>
-            <div class="price">S/. 99.90</div>
-            <button class="btn-add-cart">Agregar al carrito <i class="fa-solid fa-circle-plus"></i> </button>
-        </div>
+        <?php
+        require '../../php/conexion.php';
 
+        // Consulta inicial para obtener todos los productos
+        $queryProd = "SELECT * FROM producto";
+        $resultProd = $conn->query($queryProd);
 
-
+        if ($resultProd->num_rows > 0) {
+            while ($row = $resultProd->fetch_assoc()) {
+                echo '<div class="card">';
+                echo '<img src="data:image/png;base64,' . base64_encode($row['foto']) . '" alt="Imagen del producto">';
+                echo '<div class="info">';
+                echo '<h3>' . $row['Nombre'] . '</h3>';
+                echo '<p>' . $row['Descripción'] . '</p>';
+                echo '</div>';
+                echo '<div class="price">S/. ' . number_format($row['Precio'], 2) . '</div>';
+                echo '<button class="btn-add-cart">Agregar al carrito <i class="fa-solid fa-circle-plus"></i></button>';
+                echo '</div>';
+            }
+        } else {
+            echo "<p>No se encontraron productos.</p>";
+        }
+        $conn->close();
+        ?>
     </section>
 
     <script src="../../JS/carrito/carrito.js"></script>
+
     <script>
         const container = document.querySelector(".container-selected");
         const links = document.querySelectorAll(".link");
 
         container.addEventListener("click", (event) => {
-            // Verifica si el clic ocurrió en un enlace con la clase 'link'
             const target = event.target.closest(".link");
 
             if (target) {
-                event.preventDefault(); // Previene la acción por defecto de los enlaces
-
-                // Remueve la clase 'select' de todos los enlaces
+                event.preventDefault();
                 links.forEach((link) => link.classList.remove("select"));
-
-                // Agrega la clase 'select' al enlace clicado
                 target.classList.add("select");
+
+                const categoriaSeleccionada = target.getAttribute("data-categoria");
+
+                obtenerProductos(categoriaSeleccionada);
             }
         });
-    </script>
 
+        function obtenerProductos(categoria) {
+            const rowProductos = document.querySelector(".productos-container");
+
+            rowProductos.innerHTML = '<p>Cargando productos...</p>';
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", `../../php/products/obtener_productos.php?categoria=${encodeURIComponent(categoria)}`, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    rowProductos.innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        }
+    </script>
 
 </body>
 
 </html>
+

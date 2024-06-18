@@ -236,6 +236,7 @@ a{
     ESTILOS PANEL RIGHT
 ===================================*/
 .ds-panel{
+    overflow: auto;
     width: calc(100% - 250px);
     padding: 20px;
     background: var(--color-3);
