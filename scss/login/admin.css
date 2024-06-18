@@ -193,9 +193,9 @@ a {
 }
 
 .ds-perfil .info-perfil h3 {
-  font-size: 18px;
   font-weight: 400;
   margin-top: -5px;
+  text-transform: capitalize;
 }
 
 .sign-off {

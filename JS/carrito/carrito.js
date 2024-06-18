@@ -3,7 +3,9 @@
 
 // Selecciona el ícono del carrito y el contenedor del carrito
 const btnCart = document.querySelector(".container-cart-icon");
-const containerCartProducts = document.querySelector(".container-cart-products");
+const containerCartProducts = document.querySelector(
+  ".container-cart-products"
+);
 
 // Añade un evento de clic al ícono del carrito para mostrar/ocultar el contenedor del carrito
 btnCart.addEventListener("click", () => {
@@ -144,3 +146,5 @@ const showHTML = () => {
 document.addEventListener("DOMContentLoaded", () => {
   showHTML();
 });
+
+

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="shortcut icon" href="./img/logo/logo-coffee.png" type="image/x-icon">
-    <link rel="stylesheet" href="scss/index/style.css">
+    <link rel="stylesheet" href="./scss//index/style.css">
     <!-- CSS Swipper -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
@@ -20,7 +20,7 @@
             </div>
             <ul class="nav-links">
                 <li class="link"><a href="">Inicio</a></li>
-                <li class="link"><a href="pages/products.html">Productos</a></li>
+                <li class="link"><a href="pages/products/products.php">Productos</a></li>
                 <li class="link"><a href="">Direccion</a></li>
                 <li class="link"><a href="">Contacto</a></li>
             </ul>
@@ -86,7 +86,7 @@
 
     <!-- Library Swipper -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="admin/JS/swipper.js"></script>
+    <script src="./JS/swipper.js"></script>
 
 </body>
 

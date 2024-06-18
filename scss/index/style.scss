@@ -145,10 +145,14 @@ margin: 40px 0;
     font-weight: 100;
   }
   .swiper_2 {
+
     width: 100%;
     .swiper-slide { 
       display: grid;
       place-content: center;
+      width: fit-content;
+      height: fit-content;
+      
       img {
         transition: all 0.5s ease-in;
         border-radius: 8px;

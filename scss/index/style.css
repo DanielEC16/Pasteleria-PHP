@@ -165,6 +165,10 @@ header .carrousel_swipper .swiper_1 .swiper-slide img {
 .locales .swiper_2 .swiper-slide {
   display: grid;
   place-content: center;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 .locales .swiper_2 .swiper-slide img {
   transition: all 0.5s ease-in;
