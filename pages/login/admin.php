@@ -68,7 +68,24 @@ if (!isset($_SESSION['admin'])) {
 
         <div class="ds-panel">
 
-            <div id="inicio" class="content"></div>
+            <div id="inicio" class="content">
+                <div class="inicio-container">
+                    <div class="contenedor">
+                        <h3>DashBoard</h3>
+                    </div>
+                    <div class="info">
+                        <div class="card-info">
+                            
+                        </div>
+                        <div class="card-info">
+                            
+                        </div>
+                        <div class="card-info">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -195,7 +212,40 @@ if (!isset($_SESSION['admin'])) {
 
 
             <div id="ventas" class="content">
-                
+                <div class="ventas-container">
+                    <div class="contenedor">
+                        <h3>Ventas</h3>
+                    </div>
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>User</th>
+                            <th>Fecha</th>
+                            <th>Total</th>
+                        </tr>
+                        <?php
+                        require '../../php/conexion.php';
+                        $query = "SELECT * FROM ventas";
+                        $resultado = $conn->query($query);
+                        if ($resultado ->num_rows > 0) {
+                            while ($row = $resultado->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>" . $row['ID'] . "</td>";
+                                echo "<td>" . $row['UsuarioID'] . "</td>";
+                                echo "<td>" . $row['Fecha'] . "</td>";
+                                echo "<td>" . $row['Total'] . "</td>";
+                                echo "<td>";
+                                echo "<a href='../../php/login/eliminar/eliminar_user.php?id=" . $row['ID'] . "' onclick='return confirm(\"¿Estás seguro de eliminar este producto?\")'>Eliminar</a> ";
+                                echo "</td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='5'>No se encontraron ventas por el momento .</td></tr>";
+                        }
+                        $conn->close();
+                        ?>
+                    </table>
+                </div>
             </div>
 
 
@@ -295,7 +345,7 @@ if (!isset($_SESSION['admin'])) {
                                 echo "<td>" . $row['correo'] . "</td>";
                                 echo "<td>" . $row['password'] . "</td>";
                                 echo "<td>";
-                                echo "<a href='../../php/login/eliminar/eliminar_admin.php?id=" . $row['codigo'] . "' onclick='return confirm(\"¿Estás seguro de eliminar este producto?\")'>Eliminar</a> | ";
+                                echo "<a href='../../php/login/eliminar/eliminar_admin.php?id=" . $row['codigo'] . "' onclick='return confirm(\"¿Estás seguro de eliminar?\")'>Eliminar</a> | ";
                                 echo "<span class='modificar' onclick=\"mostrarModalModificarAdmin('" . $row['codigo'] . "', '" . $row['nombre'] . "', '" . $row['apellido'] . "', '" . $row['correo'] . "', '" . $row['password'] . "')\">Modificar</span>";
                                 echo "</td>";
                                 echo "</tr>";
@@ -371,7 +421,7 @@ if (!isset($_SESSION['admin'])) {
                                 echo "<td>" . $row['nombre'] . "</td>";
                                 echo "<td><img src='data:image/png;base64," . base64_encode($row['icono']) . "' alt='Imagen del producto'></td>";
                                 echo "<td>";
-                                echo "<a href='../../php/login/eliminar/eliminar_cat.php?id=" . $row['cod'] . "' onclick='return confirm(\"¿Estás seguro de eliminar este producto?\")'>Eliminar</a> | ";
+                                echo "<a href='../../php/login/eliminar/eliminar_cat.php?id=" . $row['cod'] . "' onclick='return confirm(\"¿Estás seguro de eliminar esta categoria?\")'>Eliminar</a> | ";
                                 echo "<span class='modificar' onclick=\"mostrarModalModificarCat('" . $row['cod'] . "', '" . $row['nombre'] . "')\">Modificar</span>";
                                 echo "</td>";
                                 echo "</tr>";

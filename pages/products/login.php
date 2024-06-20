@@ -102,19 +102,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="submit" name="submit_registro" value="Registrarse">
     </form>
 
-    <script>
-        function cargarFormulario(ruta) {
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "../../admin/php/" + ruta, true);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-
-                    document.querySelector(".ds-panel").innerHTML = xhr.responseText;
-                }
-            };
-            xhr.send();
-        }
-    </script>
 </body>
 </html>
 
