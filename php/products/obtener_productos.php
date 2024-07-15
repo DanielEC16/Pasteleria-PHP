@@ -32,7 +32,7 @@ if (isset($_GET['categoria'])) {
                 echo '<p>' . $row['Descripción'] . '</p>';
                 echo '</div>';
                 echo '<div class="price">S/. ' . number_format($row['Precio'], 2) . '</div>';
-                echo '<button class="btn-add-cart">Agregar al carrito <i class="fa-solid fa-circle-plus"></i></button>';
+                echo '<button class="btn-add-cart" data-id="' . $row['ID'] . '">Agregar al carrito <i class="fa-solid fa-circle-plus"></i></button>';
                 echo '</div>';
             }
         } else {

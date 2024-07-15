@@ -113,7 +113,7 @@
                 echo '<p>' . $row['Descripción'] . '</p>';
                 echo '</div>';
                 echo '<div class="price">S/. ' . number_format($row['Precio'], 2) . '</div>';
-                echo '<button class="btn-add-cart">Agregar al carrito <i class="fa-solid fa-circle-plus"></i></button>';
+                echo '<button class="btn-add-cart" data-id="' . $row['ID'] . '">Agregar al carrito <i class="fa-solid fa-circle-plus"></i></button>';
                 echo '</div>';
             }
         } else {
@@ -124,40 +124,24 @@
     </section>
 
     <script src="../../JS/carrito/carrito.js"></script>
-
+    
     <script>
-        const container = document.querySelector(".container-selected");
-        const links = document.querySelectorAll(".link");
-
-        container.addEventListener("click", (event) => {
-            const target = event.target.closest(".link");
-
-            if (target) {
-                event.preventDefault();
-                links.forEach((link) => link.classList.remove("select"));
-                target.classList.add("select");
-
-                const categoriaSeleccionada = target.getAttribute("data-categoria");
-
-                obtenerProductos(categoriaSeleccionada);
-            }
+        $(document).ready(function() {
+            $(".btn-add-cart").click(function() {
+                var productId = $(this).data("id");
+                $.ajax({
+                    url: 'agregar.php',
+                    type: 'POST',
+                    data: { id: productId },
+                    success: function(response) {
+                        var carritoCount = parseInt($("#carrito-count").text());
+                        $("#carrito-count").text(carritoCount + 1);
+                    }
+                });
+            });
         });
-
-        function obtenerProductos(categoria) {
-            const rowProductos = document.querySelector(".productos-container");
-
-            rowProductos.innerHTML = '<p>Cargando productos...</p>';
-
-            const xhr = new XMLHttpRequest();
-            xhr.open("GET", `../../php/products/obtener_productos.php?categoria=${encodeURIComponent(categoria)}`, true);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    rowProductos.innerHTML = xhr.responseText;
-                }
-            };
-            xhr.send();
-        }
     </script>
+
 
 </body>
 
