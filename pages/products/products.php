@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -7,6 +11,7 @@
     <title>Tienda de Cupcakes</title>
     <link rel="stylesheet" href="../../scss/products/products.css">
     <script src="https://kit.fontawesome.com/75a5f6846b.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -25,29 +30,18 @@
             </ul>
             <div class="container-icon">
                 <div class="container-cart-icon">
-                    <i class="fa-solid fa-cart-shopping icon-cart"></i>
+                    <a style="color: black;" href="carrito.php"><i class="fa-solid fa-cart-shopping icon-cart"></i></a>
                     <div class="count-products">
-                        <span id="contador-productos">0</span>
+                        <span id="contador-productos"><?php echo count($_SESSION['carrito'] ?? []); ?></span>
                     </div>
                 </div>
 
-                <div class="container-cart-products hidden-cart">
-                    <div class="row-product hidden">
-                        //*! AQUÍ VAN LOS PRODUCTOS
-                    </div>
 
-                    <div class="cart-total hidden">
-                        <h3>Total:</h3>
-                        <span class="total-pagar"></span>
-                    </div>
-                    <p class="cart-empty">El carrito está vacío</p>
-                </div>
 
                 <div class="container-login-icon">
                     <i class="fa-solid fa-user"></i>
                     <?php
                     // Verificar si el usuario está autenticado para mostrar el nombre o el enlace de inicio de sesión
-                    session_start();
                     if (isset($_SESSION['usuario'])) {
                         echo '<p>Bienvenido, <br/>' . $_SESSION['nombre'] . '</p>';
                         echo '<a href="../../php/products/logout.php">Cerrar <br/> Sesión</a>';
@@ -88,7 +82,6 @@
         </div>
     </main>
 
-
     <section class="search-container">
         <div class="search-input">
             <input type="text">
@@ -100,19 +93,23 @@
         <?php
         require '../../php/conexion.php';
 
-        // Consulta inicial para obtener todos los productos
         $queryProd = "SELECT * FROM producto";
         $resultProd = $conn->query($queryProd);
+
 
         if ($resultProd->num_rows > 0) {
             while ($row = $resultProd->fetch_assoc()) {
                 echo '<div class="card">';
+                // Mostrar la imagen del producto (asumiendo que se almacena como base64 en la base de datos)
                 echo '<img src="data:image/png;base64,' . base64_encode($row['foto']) . '" alt="Imagen del producto">';
                 echo '<div class="info">';
-                echo '<h3>' . $row['Nombre'] . '</h3>';
-                echo '<p>' . $row['Descripción'] . '</p>';
+                // Mostrar nombre y descripción del producto
+                echo '<h3>' . htmlspecialchars($row['Nombre']) . '</h3>';
+                echo '<p>' . htmlspecialchars($row['Descripción']) . '</p>';
                 echo '</div>';
+                // Mostrar el precio del producto
                 echo '<div class="price">S/. ' . number_format($row['Precio'], 2) . '</div>';
+                // Botón para agregar al carrito, con el ID del producto como atributo data-id
                 echo '<button class="btn-add-cart" data-id="' . $row['ID'] . '">Agregar al carrito <i class="fa-solid fa-circle-plus"></i></button>';
                 echo '</div>';
             }
@@ -123,27 +120,75 @@
         ?>
     </section>
 
+
     <script src="../../JS/carrito/carrito.js"></script>
-    
+
     <script>
         $(document).ready(function() {
             $(".btn-add-cart").click(function() {
                 var productId = $(this).data("id");
+                var quantity = 1; // Cantidad predeterminada (puedes ajustarlo según la interfaz del usuario)
+
+                // Aquí podrías obtener la cantidad desde algún control de la interfaz
+                // Por ejemplo, si tienes un input de cantidad, podrías hacer algo como:
+                // var quantity = parseInt($(this).closest(".producto").find(".cantidad-input").val());
+
                 $.ajax({
-                    url: 'agregar.php',
+                    url: '../../php/products/agregar_producto.php',
                     type: 'POST',
-                    data: { id: productId },
+                    data: {
+                        id: productId,
+                        quantity: quantity // Enviar la cantidad al backend
+                    },
                     success: function(response) {
-                        var carritoCount = parseInt($("#carrito-count").text());
-                        $("#carrito-count").text(carritoCount + 1);
+                        var data = JSON.parse(response);
+                        if (data.status == 'success') {
+                            var carritoCount = parseInt($("#contador-productos").text());
+                            $("#contador-productos").text(carritoCount + 1);
+                            // Actualizar cualquier otra parte de la interfaz que necesite refrescarse
+                            actualizarCarrito(); // Por ejemplo, una función para actualizar la lista de productos en el carrito
+                        } else {
+                            alert(data.message);
+                        }
                     }
                 });
             });
         });
-    </script>
 
+
+        const container = document.querySelector(".container-selected");
+        const links = document.querySelectorAll(".link");
+
+        container.addEventListener("click", (event) => {
+            const target = event.target.closest(".link");
+
+            if (target) {
+                event.preventDefault();
+                links.forEach((link) => link.classList.remove("select"));
+                target.classList.add("select");
+
+                const categoriaSeleccionada = target.getAttribute("data-categoria");
+
+                obtenerProductos(categoriaSeleccionada);
+            }
+        });
+
+        function obtenerProductos(categoria) {
+            const rowProductos = document.querySelector(".productos-container");
+
+            rowProductos.innerHTML = '<p>Cargando productos...</p>';
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", `../../php/products/obtener_productos.php?categoria=${encodeURIComponent(categoria)}`, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    rowProductos.innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        }
+    </script>
 
 </body>
 
 </html>
-

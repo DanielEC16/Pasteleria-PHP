@@ -33,7 +33,7 @@
                 <span>Pasteleria</span>
                 <h1>D'Leonisa</h1>
                 <p>100% Peruano</p>
-                <a href="./pages/products.html">Ver Poductos</a>
+                <a href="./pages/products/products.php">Ver Poductos</a>
             </div>
             <div class="swiper_1">
                 <div class="swiper-wrapper">

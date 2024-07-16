@@ -106,7 +106,7 @@ if (!isset($_SESSION['admin'])) {
                                 <label>Descripción</label>
                                 <input type="text" name="descripcion">
                                 <label>Precio</label>
-                                <input type="number" name="precio">
+                                <input type="number" name="precio" step="0.01">
                                 <label>Stock</label>
                                 <input type="number" name="stock">
                                 <label>Categoría</label>
@@ -183,7 +183,7 @@ if (!isset($_SESSION['admin'])) {
                                 <label>Descripción</label>
                                 <input type="text" id="descripcion" name="descripcion">
                                 <label>Precio</label>
-                                <input type="number" id="precio" name="precio">
+                                <input type="number" id="precio" name="precio" step="0.01">
                                 <label>Stock</label>
                                 <input type="number" id="stock" name="stock">
                                 <label>Categoría</label>
