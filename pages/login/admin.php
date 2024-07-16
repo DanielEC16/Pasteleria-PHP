@@ -47,7 +47,6 @@ if (!isset($_SESSION['admin'])) {
             <div class="ds-menu">
 
                 <ul>
-                    <li><a href="#" data-target="inicio"><i class="fa-solid fa-home"></i><span>Inicio</span></a></li>
                     <li><a href="#" data-target="productos"><i class="fa-solid fa-truck-fast"></i><span>Productos</span></a></li>
                     <li><a href="#" data-target="ventas"><i class="fa-solid fa-basket-shopping"></i><span>Ventas</span></a></li>
                     <li><a href="#" data-target="clientes"><i class="fa-solid fa-clipboard-list"></i><span>Clientes</span></a></li>
